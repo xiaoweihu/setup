@@ -137,6 +137,14 @@ RUN conda install -y \
 ENV TORCH_CUDA_ARCH_LIST=3.5;5.0+PTX;6.0;6.1;7.0;7.5
 RUN conda install -y pytorch=1.4 torchvision cudatoolkit=10.1 -c pytorch
 
+# install yaml
+RUN apt-get update -y \
+ && apt-get install -y libyaml-dev
+RUN pip --no-cache-dir install --force-reinstall -I pyyaml
+
+# install java
+RUN apt install ca-certificates-java openjdk-8-jdk -y
+
 RUN cd /app && \
         git clone https://github.com/pytorch/vision.git && \
         cd vision && \
